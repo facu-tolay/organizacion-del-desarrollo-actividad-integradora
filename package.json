@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dbmate": "^2.11.0",
     "jest": "^29.7.0",
     "pg": "^8.11.3"
   }
