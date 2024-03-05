@@ -7,7 +7,9 @@
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
 		"ghcr.io/marcozac/devcontainer-features/atlas:1": {},
-		"ghcr.io/devcontainers-contrib/features/direnv:1": {}
+		"ghcr.io/devcontainers-contrib/features/direnv:1": {},
+		"ghcr.io/robbert229/devcontainer-features/postgresql-client:1": {},
+		"ghcr.io/jungaretti/features/vim:1": {}
 	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
@@ -28,10 +30,13 @@
 
 	// Container variables
 	"containerEnv": {
-		"DATABASE_URL": "postgres://tdd_database:tdd_database@127.0.0.1:5432/tdd_database?sslmode=disable"
+		"PGHOST": "127.0.0.1",
+		"PGUSER": "tdd_database",
+		"PGPASSWORD": "tdd_database"
 	},
 
 	"remoteEnv": {
-		"PATH": "${containerEnv:PATH}:${containerWorkspaceFolder}/node_modules/.bin"
+		"PATH": "${containerEnv:PATH}:${containerWorkspaceFolder}/node_modules/.bin",
+		"DATABASE_URL": "postgres://${containerEnv:PGUSER}:${containerEnv:PGPASSWORD}@${containerEnv:PGHOST}:5432/tdd_database?sslmode=disable"
 	}
 }
