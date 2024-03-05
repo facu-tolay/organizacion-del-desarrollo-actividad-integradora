@@ -11,13 +11,18 @@ del curso de Organización del Desarrollo:
 - Seguimiento por tickets
 - Gitflow
 
-La actividad se va a dividir en diferntes ejes centrales
+## Actividad
 
-- Definición de los tickets con las tareas a realizar
-- Agregado de campos a la tabla `users` mediante migraciones
-- Escritura de nuevas pruebas de unidad
-- Incorporación del linter ESLint para JavaScript y de un linter para SQL,
-  pre-commit
+Para la actividad integradora, se piden resolver las issues planteadas en el 
+repositorio original en un fork en una cuenta propia. La solución debe cumplir
+los siguientes puntos
+
+- El código debe pasar la configuración de eslint sin errores.
+- El código debe pasar los tests escritos.
+- Se deben escribir nuevos casos de prueba para los cambios en el esquema
+  planteados, teniendo en cuenta al menos un caso límite para cada columna.
+- Se debe adoptar un esquema de git para resolver las issues. Las ramas
+  generadas deben quedarse en el repositorio para su posterior validación
 
 ## Requerimientos
 
