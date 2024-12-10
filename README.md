@@ -26,7 +26,9 @@ los siguientes puntos
 
 ## Requerimientos
 
-Al momento de iniciar el ambiente tenemos 3 alternativas.
+Primero que nada, este repositorio es un template, por lo que podés hacer click
+en el botón **Use this template** y arrancar en una copia en tu espacio de
+trabajo. Luego, al momento de iniciar el ambiente, tenemos 3 alternativas.
 
 ### Codespaces github
 
