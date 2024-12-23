@@ -8,6 +8,7 @@
     "lint": "eslint *.js",
     "lint:fix": "eslint *.js --fix",
     "devcontainers:start": "devcontainer build --workspace-folder .",
+    "devcontainers:run": "devcontainer up --workspace-folder .",
     "devcontainers:shell": "devcontainer exec --workspace-folder . -- bash"
   },
   "author": "",
