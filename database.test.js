@@ -118,6 +118,10 @@ describe('Test database', () => {
       expect(userCreatedAt.getFullYear()).toBe(currentDate.getFullYear())
     })
 
+    /**
+     * Conjunto de tests para la columna email
+     */
+
     test('Insert a user with an invalid email', async () => {
       const query = `INSERT INTO
                      users (email, username, birthdate, city)
@@ -125,6 +129,23 @@ describe('Test database', () => {
 
       await expect(client.query(query)).rejects.toThrow('users_email_check')
     })
+
+    test('Insert a user with an empty email', async () => {
+      const query = `INSERT INTO users (email, username, birthdate, city)
+                     VALUES ('', 'facu', '2024-10-16', 'Jujuy')`
+      await expect(client.query(query)).rejects.toThrow('users_email_check')
+    })
+
+    test('Insert a user with an excessively long email', async () => {
+      const longEmail = 'a'.repeat(256) + '@example.com'
+      const query = `INSERT INTO users (email, username, birthdate, city)
+                     VALUES ('${longEmail}', 'facu', '2024-10-16', 'Jujuy')`
+      await expect(client.query(query)).rejects.toThrow('value too long for type character varying')
+    })
+
+    /**
+     * Conjunto de tests para la columna birthdate
+     */
 
     test('Insert a user with an invalid birthdate', async () => {
       const query = `INSERT INTO
@@ -134,12 +155,45 @@ describe('Test database', () => {
       await expect(client.query(query)).rejects.toThrow('invalid input syntax for type date')
     })
 
+    test('Insert a user with an empty birthdate', async () => {
+      const query = `INSERT INTO users (email, username, birthdate, city)
+                     VALUES ('facu@gmail.com', 'facu', NULL, 'Jujuy')`
+      await expect(client.query(query)).rejects.toThrow('null value in column "birthdate"')
+    })
+
+    /**
+     * Conjunto de tests para la columna city
+     */
+
     test('Insert a user without city', async () => {
       const query = `INSERT INTO
                      users (email, username, birthdate)
                      VALUES ('user@example.com', 'user', '2024-01-02')`
 
       await expect(client.query(query)).rejects.toThrow('null value in column "city"')
+    })
+
+    test('Insert a user with a null city', async () => {
+      const query = `INSERT INTO users (email, username, birthdate, city)
+                     VALUES ('facu@gmail.com', 'facu', '2024-10-16', NULL)`
+      await expect(client.query(query)).rejects.toThrow('null value in column "city"')
+    })
+
+    test('Insert a user with an excessively long city name', async () => {
+      const longCityName = 'a'.repeat(256)
+      const query = `INSERT INTO users (email, username, birthdate, city)
+                     VALUES ('facu@gmail.com', 'facu', '2024-10-16', '${longCityName}')`
+      await expect(client.query(query)).rejects.toThrow('value too long for type character varying')
+    })
+
+    /**
+     * Conjunto de tests para la columna created_at
+     */
+
+    test('Insert a user with an invalid created_at value', async () => {
+      const query = `INSERT INTO users (email, username, birthdate, city, created_at)
+                     VALUES ('facu@gmail.com', 'facu', '2024-10-16', 'Jujuy', 'invalid_date')`
+      await expect(client.query(query)).rejects.toThrow('invalid input syntax for type timestamp')
     })
   })
 })
